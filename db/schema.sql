@@ -1,0 +1,12 @@
+DROP DATABASE IF EXISTS Employee_db;
+CREATE DATABASE Employee_db;
+
+
+use Employee_db;
+
+CREATE TABLE movies (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(100) NOT NULL,
+ last_name VARCHAR(100) NOT NULL,
+ Employee_role VARCHAR(100) NOT NULL,
+);
