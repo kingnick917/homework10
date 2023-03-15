@@ -9,4 +9,5 @@ CREATE TABLE movies (
  name VARCHAR(100) NOT NULL,
  last_name VARCHAR(100) NOT NULL,
  Employee_role VARCHAR(100) NOT NULL,
+ department_name VARCHAR(100) NOT NULL,
 );
