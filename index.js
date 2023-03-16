@@ -117,7 +117,17 @@ function viewemployees() {
   });
 }
 
-
+function add a department() {
+  const sql = `SELECT id, first_name,last_name,Employee_role FROM Employee ;`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err.message)
+      return;
+    }
+    console.log(rows)
+    init()
+  });
+}
 
 function init() {
   inquirer
