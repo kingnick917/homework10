@@ -4,10 +4,25 @@ CREATE DATABASE Employee_db;
 
 use Employee_db;
 
-CREATE TABLE movies (
+CREATE TABLE department(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
- name VARCHAR(100) NOT NULL,
- last_name VARCHAR(100) NOT NULL,
- Employee_role VARCHAR(100) NOT NULL,
- department_name VARCHAR(100) NOT NULL,
+  department_name VARCHAR(30) NOT NULL,
+)
+
+CREATE TABLE role(
+ id INT NOT NULL AUTO_INCREMENT 
+ title VARCHAR(30) NOT NULL
+ salary 
+
 );
+
+
+CREATE TABLE Employee (
+  id INT NOT NULL AUTO_INCREMENT ,
+ first_name VARCHAR(30) NOT NULL,
+ last_name VARCHAR(30) NOT NULL,
+ Employee_role VARCHAR(30) NOT NULL FOREIGN KEY (id),
+ 
+);
+
+
