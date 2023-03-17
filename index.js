@@ -1,11 +1,10 @@
 const fs = require('fs');
-const inquirer = require('inquirer');
+
 const manager = require(`./lib/Manager`)
 const mysql = require('mysql2');
+const inquirer = require(`inquirer`)
 
 
-const PORT = process.env.PORT || 3001;
-const app = express();
 
 
 const menuQuestions = [
@@ -15,9 +14,8 @@ const menuQuestions = [
     name: 'menu',
     choices: [`view all departments`, `view all roles`, `view all employees`, `add a department`,
       `add a role`, `add an employee`, `update an employee role`]
-  },
-
-]
+  }
+];
 
 
 const employeeQuestions = [
@@ -32,36 +30,6 @@ const employeeQuestions = [
 
 
 
-const employeeQ = [
-  {
-    type: `input`,
-    message: `what is your name and last`,
-    name: `name`,
-  },
-  {
-    type: `input`,
-    message: `what is your ID`,
-    name: `ID`,
-  },
-  {
-    type: `input`,
-    message: `what is your job Title  `,
-    name: `jobTitle`,
-  },
-  {
-    type: `input`,
-    message: `what is your email`,
-    name: `email`,
-  },
-  {
-    type: `input`,
-    message: `what is your office number`,
-    name: `officeNumber`,
-  },
-
-
-
-]
 
 
 const db = mysql.createConnection(
@@ -117,8 +85,8 @@ function viewemployees() {
   });
 }
 
-function add a department() {
-  const sql = `SELECT id, first_name,last_name,Employee_role FROM Employee ;`;
+function addDepartment() {
+  const sql = `add database form department Left  join role`;
   db.query(sql, (err, rows) => {
     if (err) {
       console.log(err.message)
@@ -129,32 +97,71 @@ function add a department() {
   });
 }
 
+function addRole() {
+  const sql = `add role form roles Left  join employee`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err.message)
+      return;
+    }
+    console.log(rows)
+    init()
+  });
+}
+
+function addEmployee() {
+  const sql = `add database form roles Left  join employee`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err.message)
+      return;
+    }
+    console.log(rows)
+    init()
+  });
+}
+function updateEmployeeRole() {
+  const sql = `add database form roles Left  join employee`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err.message)
+      return;
+    }
+    console.log(rows)
+    init()
+  });
+};
+
 function init() {
   inquirer
     .prompt(menuQuestions)
-    .then((answers) => {
+    .then(answers => {
+      console.log(answers);
       if (answers.menu == `view all departments`) {
         console.log(answers);
         viewdepartments()
       } else if (answers.menu == `view all roles`) {
-        viewroles
+        viewroles()
       } else if (answers.menu == `view all employees`) {
-        viewemployees
+        viewemployees()
       } else if (answers.menu == `add a department`) {
-
+        addDepartment()
       } else if (answers.menu == `add a role`) {
-
-      } else if (answers.menu ==  `add an employee`) {
-
-      }else if (answers.menu ==  `update an employee role`) {
-
-      }else  {
+        addRole()
+      } else if (answers.menu == `add an employee`) {
+        addEmployee()
+      } else if (answers.menu == `update an employee role`) {
+        updateEmployeeRole()
+      } else {
         return
-      }
-      
-    })
+      };
+
+    }).catch(err => {
+      console.log(err);
+    });
+
+  console.log('finished');
 }
-init()
 
 
 
@@ -190,3 +197,7 @@ function addmanagerQ() {
     })
 }
 
+
+
+console.log("start")
+init();

@@ -4,25 +4,26 @@ CREATE DATABASE Employee_db;
 
 use Employee_db;
 
-CREATE TABLE department(
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  department_name VARCHAR(30) NOT NULL,
-)
+CREATE TABLE department (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  department_name VARCHAR(30) NOT NULL
+);
 
-CREATE TABLE role(
- id INT NOT NULL AUTO_INCREMENT 
- title VARCHAR(30) NOT NULL
- salary 
-
+CREATE TABLE role (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ title VARCHAR(30) NOT NULL,
+ salary  DECIMAL NOT NULL
 );
 
 
 CREATE TABLE Employee (
-  id INT NOT NULL AUTO_INCREMENT ,
+ id INT AUTO_INCREMENT PRIMARY KEY ,
  first_name VARCHAR(30) NOT NULL,
  last_name VARCHAR(30) NOT NULL,
- Employee_role VARCHAR(30) NOT NULL FOREIGN KEY (id),
- 
+ Employee_role int NOT NULL, 
+ FOREIGN KEY (Employee_role) 
+ REFERENCES role(id)
+ ON DELETE CASCADE
 );
 
 
