@@ -18,17 +18,39 @@ const menuQuestions = [
 ];
 
 
-const employeeQuestions = [
+
+
+
+
+ const DepartmentQ = [
   {
-    type: 'list',
-    message: 'What type of employee do you what to be ?',
-    name: 'employee',
-    choices: [`manager`]
-  },
-
-]
+    type:`input`,
+    message:`what is the name of Department`,
+    name:`name`
+   }
+ ]
 
 
+ const RoleQ = [
+  {
+    type:`input`,
+    message:`what is the name of your role`,
+    name:`title`
+   }
+ ]
+
+ const EmployeeQ = [
+  {
+    type:`input`,
+    message:`what is  name `,
+    name:`first`
+   },
+   {
+    type:`input`,
+    message:`what is last name `,
+    name:`last`
+   }
+ ]
 
 
 
@@ -86,8 +108,13 @@ function viewemployees() {
 }
 
 function addDepartment() {
-  const sql = `add database form department Left  join role`;
-  db.query(sql, (err, rows) => {
+  const sql = `INSERT INTO department  (department_name)  VALUES (?)`;
+  inquirer
+  .prompt(DepartmentQ)
+  .then(answers => {
+    const params = [answers.name];
+
+  db.query(sql,params, (err, rows) => {
     if (err) {
       console.log(err.message)
       return;
@@ -95,11 +122,15 @@ function addDepartment() {
     console.log(rows)
     init()
   });
-}
+})}
 
 function addRole() {
-  const sql = `add role form roles Left  join employee`;
-  db.query(sql, (err, rows) => {
+  const sql = `INSERT INTO role (title, salary) VALUES (?)`;
+  inquirer
+  .prompt(RoleQ)
+  .then(answers => {
+    const params = [answers.title.salary];
+  db.query(sql,params,(err, rows) => {
     if (err) {
       console.log(err.message)
       return;
@@ -107,11 +138,15 @@ function addRole() {
     console.log(rows)
     init()
   });
-}
+})}
 
 function addEmployee() {
-  const sql = `add database form roles Left  join employee`;
-  db.query(sql, (err, rows) => {
+  const sql = `INSERT INTO (first_name, last_name) VALUES (?)`;
+  inquirer
+  .prompt(EmployeeQ)
+  .then(answers => {
+    const params = [answers.first_name.last_name];
+  db.query(sql,params,(err, rows) => {
     if (err) {
       console.log(err.message)
       return;
@@ -119,9 +154,10 @@ function addEmployee() {
     console.log(rows)
     init()
   });
-}
+})}
 function updateEmployeeRole() {
-  const sql = `add database form roles Left  join employee`;
+  const sql = `update Employee set first_name  = ?  id = ? `;
+  
   db.query(sql, (err, rows) => {
     if (err) {
       console.log(err.message)
@@ -169,19 +205,7 @@ function init() {
 
 
 
-function addEmployee() {
-  inquirer
-    .prompt(employeeQuestions)
-    .then((answers) => {
-      if (answers.employee == `manager`) {
-        addmanagerQ();
-      } else {
-        return
 
-      }
-
-    })
-}
 
 
 
